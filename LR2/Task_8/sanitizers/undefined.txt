@@ -1,0 +1,2 @@
+g++ -fsanitize=undefined main.cpp -o main 
+./main

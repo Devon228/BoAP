@@ -1,0 +1,2 @@
+g++ -fsanitize=leak main.cpp -o main 
+./main

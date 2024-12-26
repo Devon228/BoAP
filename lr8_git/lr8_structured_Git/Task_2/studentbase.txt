@@ -1,0 +1,3 @@
+Num	Fio	Group	Mark	Wage
+2	ASfasf	123	2.20	123123.00
+1	AS	123	1.10	2.00

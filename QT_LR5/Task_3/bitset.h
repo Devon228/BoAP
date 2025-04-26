@@ -2,17 +2,18 @@
 #define BITSET_H
 
 #include <iostream>
+#include <limits.h>
 
 class Bitset
 {
     class Bitref
     {
         private:
-            long long* a;
+            unsigned long long* a;
             size_t i;
 
         public:
-            Bitref (long long* a1, size_t i1)
+            Bitref (unsigned long long* a1, size_t i1)
             {
                 a = a1;
                 i = i1;
@@ -22,7 +23,7 @@ class Bitset
             {
                 return ((*(this->a)) & (1 << (this->i)));
             }
-            void setA (long long *a1)
+            void setA (unsigned long long *a1)
             {
                 a = a1;
             }
@@ -30,7 +31,7 @@ class Bitset
             {
                 i = i1;
             }
-            long long* getA ()
+            unsigned long long* getA ()
             {
                 return a;
             }
@@ -69,9 +70,9 @@ class Bitset
 
     private:
         static const size_t bl = 64;
-
+        static const unsigned long long ALL1 = ULLONG_MAX; // 2^^64-1
         size_t sz = 0;
-        long long* bits = nullptr;
+        unsigned long long* bits = nullptr;
 
 
 
@@ -80,7 +81,7 @@ class Bitset
         Bitset (const Bitset& other);
         ~Bitset();
 
-        long long* Bits() const;
+        unsigned long long* Bits() const;
 
         Bitset& operator = (const Bitset& other);
 

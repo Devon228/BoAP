@@ -3,13 +3,13 @@
 Bitset::Bitset(size_t sz1, unsigned long long x)
 {
     sz = sz1;
-    bits = new long long[sz/bl+1];
+    bits = new unsigned long long[sz/bl+1];
 
     for (int i = 0; i < sz / bl + 1; i++)
         bits[i] = 0;
 
     for (int i = 0; i < std::min(sz, (size_t)63); i++)
-        bits[0] |= (x & (1 << i));
+        bits[0] |= (x & (1ULL << i));
 }
 Bitset::Bitset (const Bitset& other)
 {
@@ -22,22 +22,30 @@ Bitset::~Bitset()
     sz = 0;
 }
 
-long long* Bitset::Bits() const
+unsigned long long* Bitset::Bits() const
 {
     return this->bits;
 }
 
-Bitset& Bitset::operator = (const Bitset& other)
+Bitset& Bitset::operator = (const Bitset& other) //*this == other - ?
 {
+    unsigned long long* copy = new unsigned long long[sz/bl+1];
+    for (int i = 0; i < sz / bl + 1; i++)
+        copy[i] = other.Bits()[i];
+
     sz = other.sz;
     delete[] bits;
-    bits = new long long[sz/bl+1];
+    bits = new unsigned long long[sz/bl+1];
 
     for (int i = 0; i < sz / bl + 1; i++)
         bits[i] = 0;
 
-    for (int i = 0; i < sz; i++)
-        (*this)[i] = other[i]; //?
+    /*for (int i = 0; i < sz; i++)
+        (*this)[i] = other[i]; */
+    for (int i = 0; i < sz / bl + 1; i++)
+        bits[i] = copy[i]; //?
+
+    delete[] copy;
 
     return (*this);
 }
@@ -129,9 +137,8 @@ Bitset Bitset::operator ^ (const Bitset& other) const //N/64
 Bitset& Bitset::operator ~ () //N/64
 {
     for (int i = 0; i < sz / bl; i++)
-        bits[i] ^= (1ULL << 63) - 1;
-    bits[sz/bl] ^= (1 << (sz % bl));
-
+        bits[i] ^= ALL1;
+    bits[sz/bl] ^= (1ull << (sz % bl)) - 1;
     return *this;
 }
 Bitset& Bitset::operator &= (const Bitset& other)
@@ -152,6 +159,7 @@ Bitset& Bitset::operator &= (const Bitset& other)
         for (int i = std::min(sz, other.size()) / bl + 1; i < sz / bl + 1; i++)
             bits[i] = 0;
     }
+    bits[sz/bl] &= (1ull << (sz % bl)) - 1;
 
     return *this;
 }
@@ -159,6 +167,7 @@ Bitset& Bitset::operator |= (const Bitset& other)
 {
     for (int i = 0; i < std::min(sz, other.size()) / bl + 1; i++)
         bits[i] |= other.Bits()[i];
+    bits[sz/bl] &= (1ull << (sz % bl)) - 1;
 
     return *this;
 }
@@ -166,6 +175,7 @@ Bitset& Bitset::operator ^= (const Bitset& other)
 {
     for (int i = 0; i < std::min(sz, other.size()) / bl + 1; i++)
         bits[i] ^= other.Bits()[i];
+    bits[sz/bl] &= (1ull << (sz % bl)) - 1;
 
     return *this;
 }
@@ -176,7 +186,7 @@ bool Bitset::operator [] ( std::size_t pos) const //main
         throw "out of range";
 
     //std::cout << bits[pos/bl] << "l;";
-    return ((bits[pos/bl] >> (pos % bl)) & 1);
+    return ((bits[pos/bl] >> (pos % bl)) & 1ull);
 }
 Bitset::Bitref Bitset::operator [] (std::size_t pos) //main
 {
@@ -207,8 +217,8 @@ void Bitset::set (size_t ind)
 void Bitset::set ()
 {
     for (int i = 0; i < sz / bl; i++)
-        bits[i] = (1ULL << 63) - 1;
-    bits[sz/bl] = (1ULL << (sz % bl)) - 1;
+        bits[i] = ALL1;
+    bits[sz/bl] = (1ull << (sz % bl)) - 1;
 }
 void Bitset::flip (size_t ind)
 {
@@ -217,8 +227,8 @@ void Bitset::flip (size_t ind)
 void Bitset::flip ()
 {
     for (int i = 0; i < sz / bl; i++)
-        bits[i] ^= (1ULL << 63) - 1;
-    bits[sz/bl] ^= (1ULL << (sz % bl)) - 1;
+        bits[i] ^= ALL1;
+    bits[sz/bl] ^= (1ull << (sz % bl)) - 1;
 }
 
 bool Bitset::test (size_t ind)
@@ -268,7 +278,7 @@ unsigned long Bitset::to_ulong () const
 {
     unsigned long res = 0;
     for (int i = 0; i < std::min(bl/2, sz); i++)
-        res |= ((1 & (*this)[i]) << i);
+        res |= ((1ull & (*this)[i]) << i);
 
     return res;
 }

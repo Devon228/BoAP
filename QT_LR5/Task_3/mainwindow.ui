@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>800</width>
+    <width>1763</width>
     <height>600</height>
    </rect>
   </property>
@@ -14,17 +14,30 @@
    <string>MainWindow</string>
   </property>
   <widget class="QWidget" name="centralwidget">
-   <widget class="QTableWidget" name="tableWidget">
+   <widget class="QTableWidget" name="tableWidgetA">
     <property name="geometry">
      <rect>
       <x>160</x>
       <y>30</y>
-      <width>531</width>
-      <height>61</height>
+      <width>991</width>
+      <height>81</height>
      </rect>
     </property>
+    <property name="selectionMode">
+     <enum>QAbstractItemView::NoSelection</enum>
+    </property>
+    <row>
+     <property name="text">
+      <string>1</string>
+     </property>
+    </row>
+    <column>
+     <property name="text">
+      <string>1</string>
+     </property>
+    </column>
    </widget>
-   <widget class="QSpinBox" name="spinBox">
+   <widget class="QSpinBox" name="spinBoxA">
     <property name="geometry">
      <rect>
       <x>60</x>
@@ -33,8 +46,11 @@
       <height>26</height>
      </rect>
     </property>
+    <property name="maximum">
+     <number>1</number>
+    </property>
    </widget>
-   <widget class="QPushButton" name="pushButton">
+   <widget class="QPushButton" name="addDigit">
     <property name="geometry">
      <rect>
       <x>60</x>
@@ -47,7 +63,7 @@
      <string>+</string>
     </property>
    </widget>
-   <widget class="QPushButton" name="pushButton_2">
+   <widget class="QPushButton" name="removeDigit">
     <property name="geometry">
      <rect>
       <x>110</x>
@@ -60,7 +76,7 @@
      <string>-</string>
     </property>
    </widget>
-   <widget class="QPushButton" name="pushButton_3">
+   <widget class="QPushButton" name="removeDigitB">
     <property name="geometry">
      <rect>
       <x>100</x>
@@ -73,7 +89,7 @@
      <string>-</string>
     </property>
    </widget>
-   <widget class="QSpinBox" name="spinBox_2">
+   <widget class="QSpinBox" name="spinBoxB">
     <property name="geometry">
      <rect>
       <x>50</x>
@@ -82,8 +98,11 @@
       <height>26</height>
      </rect>
     </property>
+    <property name="maximum">
+     <number>1</number>
+    </property>
    </widget>
-   <widget class="QPushButton" name="pushButton_4">
+   <widget class="QPushButton" name="addDigitB">
     <property name="geometry">
      <rect>
       <x>50</x>
@@ -96,17 +115,22 @@
      <string>+</string>
     </property>
    </widget>
-   <widget class="QTableWidget" name="tableWidget_2">
+   <widget class="QTableWidget" name="tableWidgetB">
     <property name="geometry">
      <rect>
       <x>150</x>
       <y>310</y>
-      <width>531</width>
-      <height>61</height>
+      <width>1001</width>
+      <height>81</height>
      </rect>
     </property>
+    <row>
+     <property name="text">
+      <string>1</string>
+     </property>
+    </row>
    </widget>
-   <widget class="QPushButton" name="pushButton_5">
+   <widget class="QPushButton" name="count">
     <property name="geometry">
      <rect>
       <x>60</x>
@@ -119,7 +143,7 @@
      <string>count</string>
     </property>
    </widget>
-   <widget class="QLabel" name="label">
+   <widget class="QLabel" name="labelCount">
     <property name="geometry">
      <rect>
       <x>60</x>
@@ -132,7 +156,7 @@
      <string>0</string>
     </property>
    </widget>
-   <widget class="QPushButton" name="pushButton_6">
+   <widget class="QPushButton" name="flip">
     <property name="geometry">
      <rect>
       <x>160</x>
@@ -145,7 +169,7 @@
      <string>flip</string>
     </property>
    </widget>
-   <widget class="QPushButton" name="pushButton_7">
+   <widget class="QPushButton" name="set">
     <property name="geometry">
      <rect>
       <x>260</x>
@@ -158,7 +182,7 @@
      <string>set</string>
     </property>
    </widget>
-   <widget class="QPushButton" name="pushButton_8">
+   <widget class="QPushButton" name="reset">
     <property name="geometry">
      <rect>
       <x>360</x>
@@ -171,7 +195,7 @@
      <string>reset</string>
     </property>
    </widget>
-   <widget class="QPushButton" name="pushButton_9">
+   <widget class="QPushButton" name="to_ullong">
     <property name="geometry">
      <rect>
       <x>460</x>
@@ -184,7 +208,7 @@
      <string>to_ullong</string>
     </property>
    </widget>
-   <widget class="QSpinBox" name="spinBox_3">
+   <widget class="QSpinBox" name="spinFlip">
     <property name="geometry">
      <rect>
       <x>160</x>
@@ -193,8 +217,14 @@
       <height>26</height>
      </rect>
     </property>
+    <property name="minimum">
+     <number>-1</number>
+    </property>
+    <property name="maximum">
+     <number>100000</number>
+    </property>
    </widget>
-   <widget class="QSpinBox" name="spinBox_4">
+   <widget class="QSpinBox" name="spinSet">
     <property name="geometry">
      <rect>
       <x>260</x>
@@ -203,8 +233,14 @@
       <height>26</height>
      </rect>
     </property>
+    <property name="minimum">
+     <number>-1</number>
+    </property>
+    <property name="maximum">
+     <number>10000</number>
+    </property>
    </widget>
-   <widget class="QSpinBox" name="spinBox_5">
+   <widget class="QSpinBox" name="spinReset">
     <property name="geometry">
      <rect>
       <x>360</x>
@@ -213,13 +249,19 @@
       <height>26</height>
      </rect>
     </property>
+    <property name="minimum">
+     <number>-1</number>
+    </property>
+    <property name="maximum">
+     <number>100000</number>
+    </property>
    </widget>
-   <widget class="QLabel" name="label_2">
+   <widget class="QLabel" name="labelUll">
     <property name="geometry">
      <rect>
       <x>460</x>
       <y>160</y>
-      <width>54</width>
+      <width>161</width>
       <height>17</height>
      </rect>
     </property>
@@ -227,7 +269,7 @@
      <string>0</string>
     </property>
    </widget>
-   <widget class="QPushButton" name="pushButton_10">
+   <widget class="QPushButton" name="andButton">
     <property name="geometry">
      <rect>
       <x>60</x>
@@ -240,7 +282,7 @@
      <string>and=</string>
     </property>
    </widget>
-   <widget class="QPushButton" name="pushButton_11">
+   <widget class="QPushButton" name="orButton">
     <property name="geometry">
      <rect>
       <x>160</x>
@@ -253,7 +295,7 @@
      <string>|=</string>
     </property>
    </widget>
-   <widget class="QPushButton" name="pushButton_12">
+   <widget class="QPushButton" name="xorButton">
     <property name="geometry">
      <rect>
       <x>260</x>
@@ -266,7 +308,7 @@
      <string>^=</string>
     </property>
    </widget>
-   <widget class="QPushButton" name="pushButton_13">
+   <widget class="QPushButton" name="notButton">
     <property name="geometry">
      <rect>
       <x>370</x>
@@ -279,7 +321,7 @@
      <string>~</string>
     </property>
    </widget>
-   <widget class="QPushButton" name="pushButton_14">
+   <widget class="QPushButton" name="rnd">
     <property name="geometry">
      <rect>
       <x>110</x>
@@ -292,7 +334,7 @@
      <string>rnd</string>
     </property>
    </widget>
-   <widget class="QPushButton" name="pushButton_15">
+   <widget class="QPushButton" name="rndB">
     <property name="geometry">
      <rect>
       <x>100</x>
@@ -311,7 +353,7 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>800</width>
+     <width>1763</width>
      <height>22</height>
     </rect>
    </property>
